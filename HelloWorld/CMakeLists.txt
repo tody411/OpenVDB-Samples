@@ -34,7 +34,11 @@ find_package(boost REQUIRED)
 #=======================
 # Include setting
 #=======================
-include_directories(${OPENVDB_INCLUDE_DIRS} ${BOOST_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/src)
+include_directories(
+    ${BOOST_INCLUDE_DIRS}
+    ${OPENVDB_INCLUDE_DIRS}
+    #${ZLIB_INCLUDE_DIRS} ${ILMBASE_INCLUDE_DIRS} ${TBB43_INCLUDE_DIRS}
+    ${PROJECT_SOURCE_DIR}/src)
 
 #=======================
 # Plug-in entry point
@@ -44,7 +48,10 @@ add_executable( ${PROJECT_NAME} ${_project_SOURCE} )
 #=======================
 # Link setting
 #=======================
-target_link_libraries( ${PROJECT_NAME} ${OPENVDB_LIBRARIES})
+target_link_libraries( ${PROJECT_NAME}
+${OPENVDB_LIBRARIES}
+#${TBB43_LIBRARIES}
+${BOOST_LIBRARIES})
 
 #=======================
 # Output settings.

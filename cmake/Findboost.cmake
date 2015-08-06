@@ -17,11 +17,12 @@ include(UtilFindLib)
 
 UTIL_OUTPUT_HEADER(boost)
 set(_boost_VERSIONS "1.58.0" "1.57.0" "1.56.0")
-UTIL_FIND_LOCATION(boost _boost_VERSIONS "include/boost")
+UTIL_FIND_LOCATION(boost _boost_VERSIONS "include/boost" BOOST_LOCATION)
 
-UTIL_FIND_INCLUDE_DIRS(boost)
-UTIL_FIND_LIBRARY_DIRS(boost)
-# UTIL_FIND_LIBRARIES(boost boost)
+UTIL_FIND_INCLUDE_DIRS(boost BOOST_INCLUDE_DIRS)
+UTIL_FIND_LIBRARY_DIRS(boost BOOST_LIBRARY_DIRS)
+set(_boost_LIBRARIES "libboost_system-vc110-mt-1_57")
+UTIL_FIND_LIBRARIES(boost _boost_LIBRARIES BOOST_LIBRARIES)
 
 #=======================
 # Find package

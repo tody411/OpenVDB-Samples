@@ -55,6 +55,9 @@ _set_lib_location(Eigen)
 _set_lib_location(OpenMesh)
 _set_lib_location(OpenVDB)
 _set_lib_location(boost)
+_set_lib_location(zlib)
+_set_lib_location(IlmBase)
+_set_lib_location(tbb43)
 
 message(STATUS "")
 
