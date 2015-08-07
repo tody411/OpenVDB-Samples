@@ -50,6 +50,10 @@ add_executable( ${PROJECT_NAME} ${_project_SOURCE} )
 target_link_libraries( ${PROJECT_NAME} ${OPENVDB_LIBRARIES} ${BOOST_LIBRARIES})
 
 #=======================
+# DLL setting
+#=======================
+
+#=======================
 # Output settings.
 #=======================
 set(_bin_DIR ${PROJECT_SOURCE_DIR}/bin)

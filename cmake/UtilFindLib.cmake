@@ -97,3 +97,26 @@ function(UTIL_FIND_LIBRARIES target library_NAMES libraries_Var)
     message(STATUS "${target}: ${_target_LIBRARIES}: ${_libraries}")
 
 endfunction(UTIL_FIND_LIBRARIES)
+
+function(UTIL_FIND_DLLS target library_NAMES libraries_Var)
+    string(TOUPPER ${target} _up_target)
+    set(_target_LIBRARY_DIRS ${_up_target}_LIBRARY_DIRS)
+    set(_target_LIBRARIES ${_up_target}_LIBRARIES)
+
+    message(STATUS "${target}: library = ${${_target_LIBRARY_DIRS}}")
+
+    set(_libraries ${${libraries_Var}})
+
+    foreach(_target_lib ${${library_NAMES}})
+        message(STATUS "${target}: target_lib = ${_target_lib}")
+        set(_target_DLL ${_up_target}_${_target_lib}_DLL)
+
+        set(${_target_DLL} "${${_target_LIBRARY_DIRS}}/${_target_lib}.dll")
+
+        list(APPEND _libraries "${${_target_DLL}}")
+    endforeach()
+
+    set(${libraries_Var} ${_libraries} PARENT_SCOPE)
+    message(STATUS "${target}: ${_target_DLL}: ${_libraries}")
+
+endfunction(UTIL_FIND_DLLS)

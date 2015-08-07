@@ -59,6 +59,9 @@ _set_lib_location(zlib)
 _set_lib_location(IlmBase)
 _set_lib_location(tbb43)
 
+SET(CMAKE_FIND_LIBRARY_PREFIXES "")
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".dll")
+
 message(STATUS "")
 
 
