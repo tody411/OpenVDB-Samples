@@ -1,5 +1,6 @@
 #include <openvdb/openvdb.h>
 #include <iostream>
+#include <openvdb/tools/LevelSetSphere.h>
 int main()
 {
     // Initialize the OpenVDB library.  This must be called at least
@@ -39,4 +40,5 @@ int main()
     {
         std::cout << "Grid" << iter.getCoord() << " = " << *iter << std::endl;
     }
+
 }
