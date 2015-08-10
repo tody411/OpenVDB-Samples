@@ -23,7 +23,6 @@ public:
         std::cout << ": " << elapsed() << " sec" << std::endl;
         restart();
     }
-
 };
 
 #endif

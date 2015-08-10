@@ -32,11 +32,24 @@ find_package(OpenVDB REQUIRED)
 find_package(boost REQUIRED)
 
 #=======================
+# Find OpenCV
+#=======================
+find_package(OpenCV REQUIRED)
+
+#=======================
+# Find Qt
+#=======================
+set(CMAKE_AUTOMOC ON)
+set (CMAKE_PREFIX_PATH "C:/Program Files (x86)/Windows Kits/8.0/Lib/win8/um/x64")
+find_package(Qt5Core)
+
+#=======================
 # Include setting
 #=======================
 include_directories(
     ${BOOST_INCLUDE_DIRS}
     ${OPENVDB_INCLUDE_DIRS}
+    ${OPENCV_INCLUDE_DIRS}
     ${PROJECT_SOURCE_DIR}/src)
 
 #=======================
@@ -47,7 +60,8 @@ add_executable( ${PROJECT_NAME} ${_project_SOURCE} )
 #=======================
 # Link setting
 #=======================
-target_link_libraries( ${PROJECT_NAME} ${OPENVDB_LIBRARIES} ${BOOST_LIBRARIES})
+qt5_use_modules(${PROJECT_NAME} Core)
+target_link_libraries( ${PROJECT_NAME} ${OPENVDB_LIBRARIES} ${BOOST_LIBRARIES} ${OPENCV_LIBRARIES} ${QT_LIBRARIES})
 
 #=======================
 # Output settings.

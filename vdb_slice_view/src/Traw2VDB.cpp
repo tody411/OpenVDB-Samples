@@ -5,6 +5,8 @@
 #include "VDBIO.h"
 #include "VDBConv.h"
 
+#include <QApplication>
+
 int main ( int argc, char* argv[] )
 {
     std::string trawFilePath ( argv[1] );

@@ -22,7 +22,7 @@ def lsTrawFiles(dir):
 
 
 def binFile():
-    return os.path.join(bin_dir, "Traw2VDB.exe")
+    return os.path.join(bin_dir, "vdb_conv.exe")
 
 
 def convertDir(src_dir, dst_dir):

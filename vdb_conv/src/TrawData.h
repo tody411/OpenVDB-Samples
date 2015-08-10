@@ -25,6 +25,11 @@ public :
         return volume[z * width * height + y * width + x];
     }
 
+    void setValue ( int x, int y, int z, short d )
+    {
+        volume[z * width * height + y * width + x] = d;
+    }
+
 public:
     //! Traw volume data.
     std::vector<short> volume;

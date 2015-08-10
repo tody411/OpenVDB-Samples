@@ -10,17 +10,19 @@
 #  OPENCV_INCLUDE_DIRS      Path to OpenCV's include directories.
 #
 #  OPENCV_LIBRARIES         List of detected OpenCV libraries.
+#  OPENCV_RELEASE_LIBRARIES List of detected OpenCV release libraries.
+#  OPENCV_DEBUG_LIBRARIES   List of detected OpenCV debug libraries.
 
 message(STATUS "============================")
 message(STATUS "FindOpenCV")
 message(STATUS "============================")
 
-message(STATUS "OpenCV: location = ${OPENMESH_LOCATION}")
+message(STATUS "OpenCV: location = ${OPENCV_LOCATION}")
 
 #=======================
 # Version search list.
 #=======================
-set(_openMesh_VERSIONS)
+set(_opencv_VERSIONS)
 
 foreach(major_version RANGE 3 2 -1)
     foreach(minor_version RANGE 5 1 -1)
@@ -30,24 +32,24 @@ foreach(major_version RANGE 3 2 -1)
     endforeach()
 endforeach()
 
-set(_openMesh_SEARCH_VERSIONS)
+set( _opencv_SEARCH_VERSIONS)
 
 if(OpenCV_FIND_VERSION_EXACT)
-    # for e.g. find_package(OpenCV 3.2 EXACT)
-    list(APPEND _openMesh_SEARCH_VERSIONS "${OpenCV_FIND_VERSION}")
+    # for e.g. find_package(OpenCV 2.4.9 EXACT)
+    list(APPEND _opencv_SEARCH_VERSIONS "${OpenCV_FIND_VERSION}")
 
 else()
     if(OpenCV_FIND_VERSION)
-        # for e.g. find_package(OpenCV 3.2)
-        foreach(version ${_openMesh_VERSIONS})
+        # for e.g. find_package(OpenCV 2.4.9)
+        foreach(version ${_opencv_VERSIONS})
             if(NOT "${version}" VERSION_LESS "${OpenCV_FIND_VERSION}")
-                list(APPEND _openMesh_SEARCH_VERSIONS "${version}")
+                list(APPEND _opencv_SEARCH_VERSIONS "${version}")
             endif()
         endforeach()
 
     else()
         # find_package(OpenCV REQUIRED)
-        set(_openMesh_SEARCH_VERSIONS ${_openMesh_VERSIONS})
+        set(_opencv_SEARCH_VERSIONS ${_opencv_VERSIONS})
     endif()
 
 endif()
@@ -55,68 +57,59 @@ endif()
 #=======================
 # Path search list.
 #=======================
-set(_openMesh_SEARCH_PATHS ${OPENMESH_LOCATION})
+set(_opencv_SEARCH_PATHS "${OPENCV_LOCATION}" "C:/opencv")
 
 # Path search list from version search list.
 #-----------------------
-foreach(version ${_openMesh_SEARCH_VERSIONS})
-    set(_openMesh_SEARCH_PATHS ${_openMesh_SEARCH_PATHS}
-        "${OPENMESH_LOCATION}/${version}")
+foreach(version ${_opencv_SEARCH_VERSIONS})
+    set(_opencv_SEARCH_PATHS ${_opencv_SEARCH_PATHS}
+        "C:/opencv/${version}")
 endforeach(version)
 
 #=======================
 # Find include directory.
 #=======================
-find_path(OPENMESH_INCLUDE_DIRS OpenCV/Core
-    PATHS ${_openMesh_SEARCH_PATHS}
+find_path(OPENCV_INCLUDE_DIRS opencv2/opencv.hpp
+    PATHS ${_opencv_SEARCH_PATHS}
     PATH_SUFFIXES
-        include
+        build/include
     DOC "OpenCV: include")
 
-message(STATUS "OpenCV: include = ${OPENMESH_INCLUDE_DIRS}")
+message(STATUS "OpenCV: include = ${OPENCV_INCLUDE_DIRS}")
 
-if (OPENMESH_INCLUDE_DIRS)
-    string(REGEX MATCH "[0-9].[0-9]" OPENMESH_VERSION "${OPENMESH_INCLUDE_DIRS}")
+if (OPENCV_INCLUDE_DIRS)
+    string(REGEX MATCH "[0-9].[0-9].[0-9]" OPENCV_VERSION "${OPENCV_INCLUDE_DIRS}")
 endif()
-message(STATUS "OpenCV: version = ${OPENMESH_VERSION}")
+message(STATUS "OpenCV: version = ${OPENCV_VERSION}")
 
-if (OPENMESH_INCLUDE_DIRS)
-    string(REGEX REPLACE "/include" "" OPENMESH_LOCATION "${OPENMESH_INCLUDE_DIRS}")
+if (OPENCV_INCLUDE_DIRS)
+    string(REGEX REPLACE "/include" "" OPENCV_LOCATION "${OPENCV_INCLUDE_DIRS}")
 endif()
 
-message(STATUS "OpenCV: location = ${OPENMESH_LOCATION}")
+message(STATUS "OpenCV: location = ${OPENCV_LOCATION}")
 
 #=======================
 # Find library directory.
 #=======================
-
-set(OPENMESH_LIBRARY_DIRS ${OPENMESH_LOCATION}/lib)
-
 if(MSVC_ARCH STREQUAL "32")
-    set(OPENMESH_LIBRARY_DIRS ${OPENMESH_LIBRARY_DIRS}/x86)
+    set(OPENCV_LIBRARY_DIRS ${OPENCV_LOCATION}/x86)
 else()
-    set(OPENMESH_LIBRARY_DIRS ${OPENMESH_LIBRARY_DIRS}/x64)
+    set(OPENCV_LIBRARY_DIRS ${OPENCV_LOCATION}/x64)
 endif()
 
-message(STATUS "OpenCV: library = ${OPENMESH_LIBRARY_DIRS}")
+set(OPENCV_LIBRARY_DIRS ${OPENCV_LIBRARY_DIRS}/vc${MSVC_TOOL_VERSION}/lib)
 
-foreach(_openMesh_lib
-    Core
-    Tools)
+message(STATUS "OpenCV: library = ${OPENCV_LIBRARY_DIRS}")
 
-    find_library(OPENMESH_${_openMesh_lib}_LIBRARY OpenCV${_openMesh_lib}
-        PATHS ${OPENMESH_LIBRARY_DIRS}
-        PATH_SUFFIXES lib
-        DOC "OpenCV: ${OPENMESH_LIB} library")
-    if (OPENMESH_${_openMesh_lib}_LIBRARY)
-        message(STATUS "OpenCV: OPENMESH_${_openMesh_lib}_LIBRARY: ${OPENMESH_${_openMesh_lib}_LIBRARY}")
-    endif()
-    list(APPEND OPENMESH_LIBRARIES ${OPENMESH_${_openMesh_lib}_LIBRARY})
-endforeach()
+file(GLOB OPENCV_RELEASE_LIBRARIES "${OPENCV_LIBRARY_DIRS}/*[0-9][0-9][0-9].lib")
+file(GLOB OPENCV_DEBUG_LIBRARIES "${OPENCV_LIBRARY_DIRS}/*[0-9][0-9][0-9]d.lib")
+
+set(OPENCV_LIBRARIES ${OPENCV_RELEASE_LIBRARIES})
+message(STATUS "OpenCV: libraries = ${OPENCV_LIBRARIES}")
 
 #=======================
 # Find package
 #=======================
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(OpenCV DEFAULT_MSG
-    OPENMESH_INCLUDE_DIRS OPENMESH_LIBRARY_DIRS OPENMESH_VERSION)
+    OPENCV_INCLUDE_DIRS OPENCV_LIBRARY_DIRS OPENCV_VERSION)
