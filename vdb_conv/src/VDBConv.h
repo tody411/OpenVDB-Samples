@@ -9,15 +9,15 @@
 #ifndef VDBCONV_H
 #define VDBCONV_H
 
-#include "TrawData.h"
+#include "GridData.h"
 #include <openvdb/openvdb.h>
 
 //! VDBConv implementation.
 namespace vdb_conv
 {
-    openvdb::FloatGrid::Ptr traw2vdb ( TrawData& trawVolume );
 
-
+    template<typename ValueType>
+    openvdb::FloatGrid::Ptr grid2vdb ( GridData<ValueType>& gridData, float tolerance = 0.05f );
 
 };
 

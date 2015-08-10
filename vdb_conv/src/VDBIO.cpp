@@ -10,14 +10,18 @@
 
 #include <openvdb/tools/Dense.h>
 
-bool vdb_io::loadTraw ( const std::string& filePath, TrawData& data )
+#include "ImageSliceIO.h"
+
+bool vdb_io::loadTraw ( const std::string& filePath, ShortGridData& data )
 {
     FILE* fp = fopen ( filePath.c_str(), "rb" );
     if ( fp == 0 ) return false;
 
-    fread ( &data.width , sizeof ( int   ), 1, fp );
-    fread ( &data.height , sizeof ( int   ), 1, fp );
-    fread ( &data.depth , sizeof ( int   ), 1, fp );
+    int width, height, depth;
+
+    fread ( &width , sizeof ( int   ), 1, fp );
+    fread ( &height , sizeof ( int   ), 1, fp );
+    fread ( &depth , sizeof ( int   ), 1, fp );
 
     double px, py, pz; // pitch in x,y,z axes
     fread ( &px, sizeof ( double ), 1, fp );
@@ -25,15 +29,22 @@ bool vdb_io::loadTraw ( const std::string& filePath, TrawData& data )
     fread ( &pz, sizeof ( double ), 1, fp );
 
     //read signed short array
-    data.volume.resize ( data.width * data.height * data.depth );
+    data.create ( width, height, depth );
 
-    if ( fread ( &data.volume[0], sizeof ( short ), data.width * data.height * data.depth, fp ) != data.width * data.height * data.depth )
+    if ( fread ( data.data(), sizeof ( short ), width * height * depth, fp ) != width * height * depth )
     {
         fclose ( fp );
         return false;
     }
 
     fclose ( fp );
+    return true;
+}
+
+bool vdb_io::loadImageSlices ( const std::string& dirPath, UcharGridData& data )
+{
+    ImageSliceIO imageSliceIO ( dirPath );
+    imageSliceIO.load ( data );
     return true;
 }
 

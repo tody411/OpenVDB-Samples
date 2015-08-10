@@ -1,0 +1,8 @@
+SuccessFully loaded
+ vdb_io::loadImageSlices: 0.613 sec
+(width, height, depth): (512, 512, 314)
+
+density_max: 255
+density_min: 1
+vdb_conv::grid2vdb  : 3.813 sec
+vdb_io::writeGrid   : 0.753 sec

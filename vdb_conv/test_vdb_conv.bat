@@ -1,1 +1,0 @@
-bin\vdb_conv.exe "E:/datasets/CTData_uRay/20150718/Hozuki.traw3D_ss" > test_vdb_conv.log

@@ -10,13 +10,15 @@
 #define VDBIO_H
 
 #include <string>
-#include "TrawData.h"
+#include "GridData.h"
 #include <openvdb/openvdb.h>
 
 //! VDBIO implementation.
 namespace vdb_io
 {
-    bool loadTraw ( const std::string& filePath, TrawData& data );
+    bool loadTraw ( const std::string& filePath, ShortGridData& data );
+
+    bool loadImageSlices ( const std::string& dirPath, UcharGridData& data );
 
     bool writeGrid ( const std::string& filePath, openvdb::FloatGrid::Ptr vdbGrid );
 };
