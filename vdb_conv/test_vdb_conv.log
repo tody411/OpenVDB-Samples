@@ -1,0 +1,7 @@
+SuccessFully loaded
+ vdb_io::loadTraw   : 7.191 sec
+(width, height, depth): (461, 470, 487)
+density_max: 2298
+density_min: -414
+vdb_conv::traw2vdb  : 6.672 sec
+vdb_io::writeGrid   : 0.291 sec

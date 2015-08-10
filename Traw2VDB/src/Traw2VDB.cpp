@@ -18,7 +18,7 @@ int main ( int argc, char* argv[] )
 
     openvdb::initialize();
 
-    VDBInfo::showVDBInfo ( "C:/Users/tody/Documents/GitHub/OpenVDB-Samples/Traw2VDB/bunny_cloud.vdb" );
+    //VDBInfo::showVDBInfo ( "C:/Users/tody/Documents/GitHub/OpenVDB-Samples/Traw2VDB/bunny_cloud.vdb" );
     //return 0;
 
     std::vector<short> volume;
