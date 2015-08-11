@@ -132,7 +132,7 @@ int main ( int argc, char* argv[] )
     }
 
     TimerLog tl;
-    vdb_io::writeGrid ( outputFile.toStdString(), vdbGrid );
+    vdb_io::writeDensityGrid ( outputFile.toStdString(), vdbGrid );
     tl ( "Write VDB files" );
 
     return 0;

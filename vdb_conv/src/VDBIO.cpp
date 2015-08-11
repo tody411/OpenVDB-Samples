@@ -48,7 +48,7 @@ bool vdb_io::loadImageSlices ( const std::string& dirPath, UcharGridData& data )
     return true;
 }
 
-bool vdb_io::writeGrid ( const std::string& filePath, openvdb::FloatGrid::Ptr vdbGrid  )
+bool vdb_io::writeDensityGrid ( const std::string& filePath, openvdb::FloatGrid::Ptr vdbGrid  )
 {
     openvdb::io::File file ( filePath );
 
