@@ -4,7 +4,7 @@ OpenVDB samples (C++)
 
 Simple OpenVDB samples.
 
-* [**vdb_conv**](vdb_cons)
+* [**vdb_conv**](vdb_conv)
     - Simple file converter for OpenVDB.
 * [**vdb_slice_view**](vdb_slice_view)
     - Simple slice viewer for OpenVDB.
