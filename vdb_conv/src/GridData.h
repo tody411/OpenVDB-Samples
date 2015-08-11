@@ -63,7 +63,7 @@ public :
 
     void printSizeInfo ( std::ostream& stream ) const
     {
-        stream << "(width, height, depth): (" << width << ", " << height << ", " << depth << ")" << std::endl;
+        stream << "  - (width, height, depth): (" << width << ", " << height << ", " << depth << ")" << std::endl;
     }
 
 public:

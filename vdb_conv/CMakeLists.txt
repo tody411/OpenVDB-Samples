@@ -53,7 +53,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src)
 
 #=======================
-# Plug-in entry point
+# Main entry point
 #=======================
 add_executable( ${PROJECT_NAME} ${_project_SOURCE} )
 

@@ -1,0 +1,13 @@
+==========================
+Traw to VDB.
+==========================
+input: E:/datasets/CTData_uRay/20150718/Hozuki.traw3D_ss
+tolerance: 0.05
+  - Success: load
+  - (width, height, depth): (461, 470, 487)
+
+Load Traw files: 0.185 sec
+density_max: 2298
+density_min: -414
+Convert Traw to VDB: 7.75 sec
+Writing VDB files: 0.298 sec

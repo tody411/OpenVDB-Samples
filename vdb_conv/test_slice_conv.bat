@@ -1,1 +1,1 @@
-bin\vdb_conv.exe "E:/datasets/CTData_uRay/Nishimura/carrot/009slice" > test_slice_conv.log
+bin\vdb_conv.exe  "E:/datasets/CTData_uRay/Nishimura/carrot/009slice" "test_slice.vdb" --tolerance "0.2" > test_slice_conv.log

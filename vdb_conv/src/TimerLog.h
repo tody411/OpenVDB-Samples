@@ -19,7 +19,7 @@ class TimerLog : public boost::timer
 public:
     void operator() ( const char* title )
     {
-        std::cout << std::setw ( 20 ) << std::left << title;
+        std::cout << title;
         std::cout << ": " << elapsed() << " sec" << std::endl;
         restart();
     }

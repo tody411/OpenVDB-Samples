@@ -1,8 +1,13 @@
-SuccessFully loaded
- vdb_io::loadImageSlices: 0.613 sec
-(width, height, depth): (512, 512, 314)
+==========================
+Image Slices to VDB.
+==========================
+input: E:/datasets/CTData_uRay/Nishimura/carrot/009slice
+tolerance: 0.05
+  - Success: load
+Load slice images: 1.055 sec
+  - (width, height, depth): (512, 512, 314)
 
 density_max: 255
 density_min: 1
-vdb_conv::grid2vdb  : 3.813 sec
-vdb_io::writeGrid   : 0.753 sec
+Converting Image slice to VDB: 5.816 sec
+Write VDB files: 1.412 sec
